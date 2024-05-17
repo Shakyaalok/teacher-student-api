@@ -1,6 +1,7 @@
 const Sequelize = require('sequelize');
 const sequelize = require('../Config/db');
-const register = sequelize.define('register', {
+
+const student = sequelize.define('student', {
     id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
@@ -11,18 +12,15 @@ const register = sequelize.define('register', {
         type: Sequelize.STRING,
         allowNull: false,
     },
-    email: {
+    subject: {
         type: Sequelize.STRING,
         allowNull: false,
-        unique: true
     },
-    password: {
-        type: Sequelize.STRING,
-        allowNull: false
+    marks: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
     }
-
-
 })
 
 
-module.exports = register;
+module.exports = student;

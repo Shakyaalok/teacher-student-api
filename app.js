@@ -8,7 +8,11 @@ require('dotenv').config();
 const db = require('./Config/db')
 
 
-
+// models
+// these does not do anything here right now
+// but if we dont include these files then it cannot be synchronized
+const Register = require('./Models/Register');
+const Student = require('./Models/Student')
 
 
 
