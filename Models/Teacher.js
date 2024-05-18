@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 const sequelize = require('../Config/db');
-const register = sequelize.define('register', {
+const teacher = sequelize.define('teacher', {
     id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
@@ -25,4 +25,4 @@ const register = sequelize.define('register', {
 })
 
 
-module.exports = register;
+module.exports = teacher;

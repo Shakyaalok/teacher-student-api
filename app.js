@@ -13,11 +13,11 @@ app.use(express.json());
 // models
 // these does not do anything here right now
 // but if we dont include these files then it cannot be synchronized
-const Register = require('./Models/Register');
-const Student = require('./Models/Student')
+const teacherModels = require('./Models/Teacher');
+const studentModels = require('./Models/Student')
 
 //routes
-const registerRoute = require('./Routes/Regsiter');
+const registerRoute = require('./Routes/Teacher');
 
 
 

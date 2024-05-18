@@ -1,7 +1,7 @@
-const Register = require('../Models/Register');
+const Register = require('../Models/Teacher');
 const bcrypt = require('bcrypt');
 
-const register = async(req, res) => {
+const teacherRegister = async(req, res) => {
     const { name, email, password } = req.body;
 
     try {
@@ -40,4 +40,4 @@ const register = async(req, res) => {
 }
 
 
-module.exports = { register }
+module.exports = { teacherRegister }
