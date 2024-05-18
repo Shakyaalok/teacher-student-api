@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors')
 const app = express();
 
 //dotenv configuration
@@ -9,10 +10,10 @@ const db = require('./Config/db')
 
 //middlewares
 app.use(express.json());
-
-// models
-// these does not do anything here right now
-// but if we dont include these files then it cannot be synchronized
+app.use(cors())
+    // models
+    // these does not do anything here right now
+    // but if we dont include these files then it cannot be synchronized
 const teacherModels = require('./Models/Teacher');
 const studentModels = require('./Models/Student')
 

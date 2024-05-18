@@ -5,7 +5,7 @@ const router = express.Router();
 
 
 router.post('/register', teacherRegister);
-router.get('/login', teacherLogin)
+router.post('/login', teacherLogin)
 
 
 module.exports = router;

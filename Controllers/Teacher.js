@@ -46,24 +46,28 @@ const teacherRegister = async(req, res) => {
 const teacherLogin = async(req, res) => {
     const { email, password } = req.body;
 
-    if (!email || !password) {
-        return res.status(500).json({ message: 'Fields cannot be empty' });
+    try {
+        if (!email || !password) {
+            return res.status(500).json({ message: 'Fields cannot be empty' });
+        }
+
+        let teacher = await Teacher.findOne({ where: { email }, raw: true });
+        if (!teacher) {
+            return res.status(404).json({ message: 'User not registered' });
+        }
+
+        let match = await bcrypt.compare(password, teacher.password);
+        if (!match) {
+            return res.status(500).json({ message: 'Check your credentails' });
+        }
+
+        // doing : because this password variable exists already so we did -password: pwd
+        const { password: pwd, ...updatedData } = teacher
+
+        return res.status(200).json({ data: updatedData, message: 'Login Successfull!' });
+    } catch (error) {
+        return res.status(500).json({ message: 'something went wrong', error });
     }
-
-    let teacher = await Teacher.findOne({ where: { email }, raw: true });
-    if (!teacher) {
-        return res.status(404).json({ message: 'User not registered' });
-    }
-
-    let match = await bcrypt.compare(password, teacher.password);
-    if (!match) {
-        return res.status(500).json({ message: 'password does not match' });
-    }
-
-    // doing : because this password variable exists already so we did -password: pwd
-    const { password: pwd, ...updatedData } = teacher
-
-    return res.status(200).json({ data: updatedData, message: 'Login Successfull!' });
 }
 
 module.exports = { teacherRegister, teacherLogin }
