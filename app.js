@@ -7,6 +7,8 @@ require('dotenv').config();
 //db
 const db = require('./Config/db')
 
+//middlewares
+app.use(express.json());
 
 // models
 // these does not do anything here right now
@@ -14,7 +16,12 @@ const db = require('./Config/db')
 const Register = require('./Models/Register');
 const Student = require('./Models/Student')
 
+//routes
+const registerRoute = require('./Routes/Regsiter');
 
+
+
+app.use('/teacher', registerRoute);
 
 
 // connection to the table
