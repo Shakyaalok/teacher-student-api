@@ -1,6 +1,7 @@
 const { raw } = require('mysql2');
 const Teacher = require('../Models/Teacher');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken')
 
 //Registration
 const teacherRegister = async(req, res) => {
@@ -64,10 +65,20 @@ const teacherLogin = async(req, res) => {
         // doing : because this password variable exists already so we did -password: pwd
         const { password: pwd, ...updatedData } = teacher
 
-        return res.status(200).json({ data: updatedData, message: 'Login Successfull!' });
+        //token created while the user login
+        console.log('id', teacher.id)
+        const token = generateToken(teacher.id);
+
+
+        res.status(200).json({ data: updatedData, token, message: 'Login Successfull!' });
     } catch (error) {
+        console.log(error)
         return res.status(500).json({ message: 'something went wrong', error });
     }
+}
+
+const generateToken = (teacherId) => {
+    return jwt.sign({ teacherId: teacherId }, process.env.SECRET_KEY, { expiresIn: '1h' })
 }
 
 module.exports = { teacherRegister, teacherLogin }
