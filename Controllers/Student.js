@@ -1,7 +1,7 @@
 const Student = require('../Models/Student');
 const { Op } = require('sequelize');
 
-
+//student added
 const addStudent = async(req, res) => {
     const { name, marks, subject } = req.body;
 
@@ -34,4 +34,22 @@ const addStudent = async(req, res) => {
     }
 }
 
-module.exports = { addStudent }
+//student fetch;
+const allStudent = async(req, res) => {
+    try {
+        const students = await Student.findAll();
+        if (!students) {
+            return res.status(404).json({ message: 'No Record found' })
+        }
+
+        res.status(200).json({ data: students, message: 'All Records fetched' })
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: 'Something went wrong' })
+    }
+}
+
+
+
+
+module.exports = { addStudent, allStudent }
