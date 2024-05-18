@@ -19,10 +19,12 @@ const studentModels = require('./Models/Student')
 
 //routes
 const registerRoute = require('./Routes/Teacher');
+const studentRoute = require('./Routes/Student')
 
 
 
 app.use('/teacher', registerRoute);
+app.use('/student', studentRoute);
 
 
 // connection to the table
