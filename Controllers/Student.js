@@ -36,8 +36,17 @@ const addStudent = async(req, res) => {
 
 //student fetch;
 const allStudent = async(req, res) => {
+    const { query } = req.query;
     try {
-        const students = await Student.findAll();
+        let where = {};
+        if (query) {
+            where = {
+                name: {
+                    [Op.like]: `%${query}%`
+                }
+            }
+        }
+        const students = await Student.findAll({ where });
         if (!students) {
             return res.status(404).json({ message: 'No Record found' })
         }
@@ -65,7 +74,6 @@ const deleteStudent = async(req, res) => {
     }
 
 }
-
 
 
 
