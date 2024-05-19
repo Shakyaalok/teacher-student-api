@@ -49,7 +49,24 @@ const allStudent = async(req, res) => {
     }
 }
 
+//delete student
+const deleteStudent = async(req, res) => {
+    const { id } = req.params
+    try {
+        const isExist = await Student.findOne({ where: { id: id } });
+        if (!isExist) {
+            return res.status(500).json({ message: 'something went wrong' })
+        }
+        await Student.destroy({ where: { id: id } });
+        res.status(200).json({ message: 'delete Suceefully' })
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({ message: 'something went wrong' })
+    }
+
+}
 
 
 
-module.exports = { addStudent, allStudent }
+
+module.exports = { addStudent, allStudent, deleteStudent }
