@@ -1,0 +1,14 @@
+steps to start the backend 
+1. npm install
+2. add a script in package.json - "start":"nodemon app.js"
+3. and then npm start
+4. make a table in database name - student_management
+5. make a env file and paste this below required data and put your own database creddentials
+
+DB_NAME=student_management
+DB_USER_NAME='your databse user name'
+DB_PASSWORD='your database password'
+DB_HOST=localhost
+DB_DIALECT=mysql
+PORT=8000
+SECRET_KEY=' your secret for jwt verfication'
