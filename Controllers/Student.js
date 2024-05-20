@@ -64,7 +64,7 @@ const deleteStudent = async(req, res) => {
     try {
         const isExist = await Student.findOne({ where: { id: id } });
         if (!isExist) {
-            return res.status(500).json({ message: 'something went wrong' })
+            return res.status(404).json({ message: 'No student found' })
         }
         await Student.destroy({ where: { id: id } });
         res.status(200).json({ message: 'delete Suceefully' })
